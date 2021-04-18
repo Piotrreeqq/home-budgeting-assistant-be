@@ -45,7 +45,7 @@ public class RegistryService {
             throw new RegistryNotFoundException(String.format("Registry '%s' not found for user: '%s'", registryId, userId));
         }
 
-        registry.setAmount(registry.getAmount() + rechargeRequest.getAmount());
+        registry.setAmount(registry.getAmount().add(rechargeRequest.getAmount()));
     }
 
     @Transactional
@@ -62,12 +62,12 @@ public class RegistryService {
                     transferRequest.getTargetRegistryId(), userId));
         }
 
-        if (sourceRegistry.getAmount() < transferRequest.getAmount()) {
+        if (sourceRegistry.getAmount().floatValue() < transferRequest.getAmount().floatValue()) {
             throw new InvalidRequestException(String.format("Not enough funds for the transfer. Source amount: %s, requested transfer: %s",
                     sourceRegistry.getAmount(), transferRequest.getAmount()));
         }
 
-        sourceRegistry.setAmount(sourceRegistry.getAmount() - transferRequest.getAmount());
-        targetRegistry.setAmount(targetRegistry.getAmount() + transferRequest.getAmount());
+        sourceRegistry.setAmount(sourceRegistry.getAmount().subtract(transferRequest.getAmount()));
+        targetRegistry.setAmount(targetRegistry.getAmount().add(transferRequest.getAmount()));
     }
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -19,9 +20,9 @@ public class Registry {
     private String id;
     private String label;
     private String userId;
-    private float amount;
+    private BigDecimal amount;
 
-    public Registry(String label, String userId, float amount) {
+    public Registry(String label, String userId, BigDecimal amount) {
         this.label = label;
         this.userId = userId;
         this.amount = amount;

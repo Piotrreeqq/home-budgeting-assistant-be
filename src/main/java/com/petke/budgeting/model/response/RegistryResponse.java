@@ -3,13 +3,15 @@ package com.petke.budgeting.model.response;
 import com.petke.budgeting.model.Registry;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 
 @Data
 public class RegistryResponse {
 
     private String id;
     private String label;
-    private float amount;
+    private BigDecimal amount;
 
     public RegistryResponse(Registry registry) {
         this.id = registry.getId();
